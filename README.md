@@ -1,1 +1,0 @@
-# comparitive-judgement-ui
