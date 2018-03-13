@@ -1,9 +1,12 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import App from './App';
+import { mount } from 'enzyme';
 
-it('renders the App component', () => {
-  const div = document.createElement('div');
-  ReactDOM.render(<App />, div);
-  ReactDOM.unmountComponentAtNode(div);
-});
+describe('App', () => {
+  it('sets the image URL', () => {
+    const wrapper = mount(<App />);
+    const inst = wrapper.instance()
+    inst.setImage()
+    expect(inst.state.imageUrl).toEqual('./jester.jpeg');
+  })
+})
