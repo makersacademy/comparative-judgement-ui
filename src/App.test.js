@@ -3,14 +3,8 @@ import App from './App';
 import { mount, shallow } from 'enzyme';
 
 describe('App', () => {
-  const wrapper = mount(<App />);
-  const inst = wrapper.instance()
 
-  it('loads with no image', () => {
-    expect(inst.state.imageUrl).toEqual('')
-  })
-
-  it('updates state with image url', () => {
+  it('updates state with first image url', () => {
     // arrange
     const appInstance = shallow(<App />);
 
@@ -18,6 +12,19 @@ describe('App', () => {
     appInstance.find('button').simulate('click');
 
     // assert
-    expect(appInstance.find('img').prop('src')).toEqual('./jester.jpeg');
+    expect(appInstance.find('#firstImage').prop('src')).toEqual('./jester.jpeg');
   })
+
+
+  it('updates state with second image url', () => {
+    // arrange
+    const appInstance = shallow(<App />);
+
+    // act
+    appInstance.find('button').simulate('click');
+
+    // assert
+    expect(appInstance.find('#secondImage').prop('src')).toEqual('./minstrel.jpg');
+  })
+
 })

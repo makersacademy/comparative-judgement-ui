@@ -11,14 +11,21 @@ class App extends Component {
   }
 
   setImage() {
-    this.setState({ imageUrl: './jester.jpeg'});
+    this.setState(
+      {
+        firstImageUrl: './jester.jpeg',
+        secondImageUrl: './minstrel.jpg',
+      }
+
+    );
   }
 
   render() {
 
     return (
       <div className="App">
-        <img className='image' src={this.state.imageUrl} />
+        <img id='firstImage' className='image' src={this.state.firstImageUrl} />
+        <img id='secondImage' className='image' src={this.state.secondImageUrl} />
         <button onClick={this.setImage}>Update image</button>
       </div>
     );
