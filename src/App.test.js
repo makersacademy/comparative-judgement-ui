@@ -1,6 +1,6 @@
 import React from 'react';
 import App from './App';
-import { mount } from 'enzyme';
+import { mount, shallow } from 'enzyme';
 
 describe('App', () => {
   const wrapper = mount(<App />);
@@ -11,7 +11,13 @@ describe('App', () => {
   })
 
   it('updates state with image url', () => {
-    inst.setImage()
-    expect(inst.state.imageUrl).toEqual('./jester.jpeg');
+    // arrange
+    const appInstance = shallow(<App />);
+
+    // act
+    appInstance.find('button').simulate('click');
+
+    // assert
+    expect(appInstance.find('img').prop('src')).toEqual('./jester.jpeg');
   })
 })
