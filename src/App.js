@@ -1,32 +1,29 @@
 import React, { Component } from 'react';
 
-
 class App extends Component {
   constructor() {
-      super();
+    super();
 
-      this.state = { imageUrl: '' };
-
-      this.setImage = this.setImage.bind(this);
+    this.state =  { imageURL: [] }
   }
 
-  setImage() {
-    this.setState(
-      {
-        firstImageUrl: './jester.jpeg',
-        secondImageUrl: './minstrel.jpg',
-      }
+  componentDidMount() {
+    fetch('/comparison')
+      .then(res => res.json())
+      .then(images => this.setState({
+         imageURL: [...this.state.imageURL, images]
 
-    );
+      }))
+      // .bind(this);
+      console.log(this.state)
   }
 
   render() {
 
     return (
       <div className="App">
-        <img id='firstImage' className='image' src={this.state.firstImageUrl} />
-        <img id='secondImage' className='image' src={this.state.secondImageUrl} />
-        <button onClick={this.setImage}>Update image</button>
+        <img id='firstImage' className='image' src={this.state.imageURL} />
+        <img id='secondImage' className='image' src={this.state.imageURL} />
       </div>
     );
   }
