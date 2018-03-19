@@ -3,24 +3,29 @@ import React, { Component } from 'react';
 class App extends Component {
   constructor() {
     super();
+    this.state = {
+      "firstImageUrl": "./jester.jpeg",
+      "secondImageUrl": "./Minstrel.jpg",
+      "chosenImageUrl": "./Minstrel.jpg"
+    }
 
-    this.state =  { imageURLs:  [] }
+    this.submitChoice = this.submitChoice.bind(this)
   }
 
   componentDidMount() {
     fetch('/comparison')
       .then(res => res.json())
       .then(images => this.setState({
-         imageURLs: [...this.state.imageURLs, images]
+          images
       }))
       // .bind(this);
       console.log(this.state)
   }
 
-  submitChoice(data) {
+  submitChoice(choice) {
     fetch('/comparison', {
       method: 'POST',
-      body: JSON.stringify([...this.state.imageURLs, data]),
+      body: JSON.stringify(this.state),
       headers: new Headers({
         'Content-Type': 'application/json'
       })
@@ -34,9 +39,9 @@ class App extends Component {
 
     return (
       <div className="App">
-        <img id='firstImage' className='image' src={this.state.imageURLs[0]} />
-        <img id='secondImage' className='image' src={this.state.imageURLs[1]} />
-        <button id='buttonOption1' className='button' onClick={this.submitChoice(this.state.imageURLs[0])}>Select Option 1</button>
+        <img id='firstImage' className='image' src={this.state.firstImageUrl} />
+        <img id='secondImage' className='image' src={this.state.secondImageUrl} />
+        <button id='buttonOption1' className='button' onClick={this.submitChoice}>Select Option 1</button>
       </div>
     );
   }
