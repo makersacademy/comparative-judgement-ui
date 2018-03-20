@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import apiService from './api-service';
 
 class App extends Component {
   constructor() {
@@ -13,11 +14,13 @@ class App extends Component {
   }
 
   componentDidMount() {
-    fetch('/comparison')
-      .then(res => res.json())
-      .then(images => this.setState({
-          images
-      }))
+    apiService.getComparison()
+    //fetch('/mockGETData.json')
+      // .then(res => res.json())
+      .then(images => {
+        console.log(images);
+        this.setState(images)
+      })
       // .bind(this);
       console.log(this.state)
   }
