@@ -19,7 +19,8 @@ describe('App', () => {
 
   })
 
-  it('should set state with two image URLs on mount', () => {
+
+  it('renders two images to the DOM on mount', () => {
 
     sinon.stub(ApiService, 'getComparison')
     .callsFake(() => Promise.resolve({firstImageUrl: './jester.jpeg', secondImageUrl: './Minstrel.jpg'}))
@@ -34,23 +35,23 @@ describe('App', () => {
       .then(() => {
         console.log(app.state())
 
-        expect(app.state().firstImageUrl).toEqual('./jester.jpeg')
+        const firstImage = app.find('#firstImage').html()
+        const secondImage = app.find('#secondImage').html()
+
+        expect(firstImage).toContain("src=\"./jester.jpeg\"")
+        expect(secondImage).toContain("src=\"./Minstrel.jpg\"")
       })
 
   })
 
-
   it('should call the submitChoice method on click', () => {
 
-  //arrange
     const spy = jest.spyOn(App.prototype, 'submitChoice');
     const app = shallow(<App />);
 
-  //act
     const button = app.find('#buttonOption1')
     button.simulate('click');
 
-  //assert
     expect(spy).toBeCalled();
     spy.mockClear()
 

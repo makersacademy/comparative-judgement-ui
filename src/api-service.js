@@ -16,7 +16,6 @@ class ApiService {
       })
     })
 
-    //return fetch('/mockGETData.json');
   }
 }
 

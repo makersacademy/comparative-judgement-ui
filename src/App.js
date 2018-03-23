@@ -12,10 +12,8 @@ class App extends Component {
   componentDidMount() {
     getComparison()
     .then(images => {
-        // console.log(images);
         this.setState(images)
       })
-      // console.log(this.state)
   }
 
   submitChoice(choice) {
