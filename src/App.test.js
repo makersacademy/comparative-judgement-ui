@@ -1,35 +1,49 @@
 import React from 'react';
 import App from './App';
-import { mount, shallow } from 'enzyme';
+import { render, mount, shallow } from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
 import { waitForState } from 'enzyme-async-helpers';
-//
+import ApiService from './api-service';
+import sinon from 'sinon';
+
 describe('App', () => {
-  // it('it fetches image URLs on mount and sets them to state',  async () => {
-  // //arrange
-  //   const fs = require("fs");
-  //   const mockGETData = fs.readFileSync('./public/mockGETData.json');
-  //
-  //   global.fetch = jest.fn(async () => ({
-  //     ok: true,
-  //     status: 200,
-  //     json: async () => ({
-  //       mockGETData
-  //     })
-  //   }))
-  //
-  //   const app = mount(<App />);
-  //
-  // //act
-  //   await waitForState(app, state => state.imageURLs.length > 0)
-  //
-  // //assert
-  //   expect(app.instance().state.imageURLs.length).toBe([mockGETData].length)
-  // })
+
+  it('it should call the API service getcomparison method on mount', () => {
+
+    const spy = jest.spyOn(ApiService, 'getComparison');
+
+    const wrapper = mount(<App />);
+
+    expect(spy).toHaveBeenCalled();
+    spy.mockClear()
+
+  })
+
+  it('should set state with two image URLs on mount', () => {
+
+    sinon.stub(ApiService, 'getComparison')
+    .callsFake(() => Promise.resolve({firstImageUrl: './jester.jpeg', secondImageUrl: './Minstrel.jpg'}))
+
+    const app = mount(<App />)
+
+    return Promise.resolve(app)
+      .then((app) => {
+        return app.update()
+            })
+
+      .then(() => {
+        console.log(app.state())
+
+        expect(app.state().firstImageUrl).toEqual('./jester.jpeg')
+      })
+
+  })
+
 
   it('should call the submitChoice method on click', () => {
 
   //arrange
-    const spy = jest.spyOn(App.prototype, 'submitChoice'); 
+    const spy = jest.spyOn(App.prototype, 'submitChoice');
     const app = shallow(<App />);
 
   //act
@@ -38,6 +52,7 @@ describe('App', () => {
 
   //assert
     expect(spy).toBeCalled();
+    spy.mockClear()
 
   })
 
