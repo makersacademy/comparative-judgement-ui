@@ -1,25 +1,19 @@
 import React, { Component } from 'react';
+import { getComparison } from './api-service.js';
 
 class App extends Component {
   constructor() {
     super();
-    this.state = {
-      "firstImageUrl": "./jester.jpeg",
-      "secondImageUrl": "./Minstrel.jpg",
-      "chosenImageUrl": "./Minstrel.jpg"
-    }
+    this.state = { }
 
     this.submitChoice = this.submitChoice.bind(this)
   }
 
   componentDidMount() {
-    fetch('/comparison')
-      .then(res => res.json())
-      .then(images => this.setState({
-          images
-      }))
-      // .bind(this);
-      console.log(this.state)
+    getComparison()
+    .then(images => {
+        this.setState(images)
+      })
   }
 
   submitChoice(choice) {
@@ -45,6 +39,6 @@ class App extends Component {
       </div>
     );
   }
- }
+}
 
 export default App;
