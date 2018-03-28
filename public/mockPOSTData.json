@@ -1,9 +1,5 @@
 {
-  "firstImageUrl": "./jester.jpeg"
-},
-{
-  "secondImageUrl": "./Minstrel.jpeg"
-},
-{
+  "firstImageUrl": "./jester.jpeg",
+  "secondImageUrl": "./Minstrel.jpeg",
   "chosenImageUrl": "./Minstrel.jpeg"
 }
