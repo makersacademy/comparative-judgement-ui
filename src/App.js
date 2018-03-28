@@ -16,7 +16,7 @@ class App extends Component {
       })
   }
 
-  submitChoice(choice) {
+  submitChoice() {
     fetch('/comparison', {
       method: 'POST',
       body: JSON.stringify(this.state),
@@ -36,6 +36,7 @@ class App extends Component {
         <img id='firstImage' className='image' src={this.state.firstImageUrl} />
         <img id='secondImage' className='image' src={this.state.secondImageUrl} />
         <button id='buttonOption1' className='button' onClick={this.submitChoice}>Select Option 1</button>
+        <button id='buttonOption2' className='button' onClick={this.submitChoice}>Select Option 2</button>
       </div>
     );
   }
