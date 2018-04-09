@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { getComparison } from './api-service.js';
+import './App.css';
+
 
 class App extends Component {
   constructor() {
@@ -32,11 +34,23 @@ class App extends Component {
   render() {
 
     return (
-      <div className="App">
-        <img id='firstImage' className='image' src={this.state.firstImageUrl} />
-        <img id='secondImage' className='image' src={this.state.secondImageUrl} />
-        <button id='buttonOption1' className='button' onClick={this.submitChoice}>Select Option 1</button>
-        <button id='buttonOption2' className='button' onClick={this.submitChoice}>Select Option 2</button>
+      <div className="App ">
+
+        <div className="flex-container center">
+          <div className="flex-item"> <img id='firstImage' className='image' src={this.state.firstImageUrl} />
+<div className="flex-container center">
+       <button id='buttonOption1' className='button' onClick={this.submitChoice}>Select Option 1</button>
+</div>
+        </div>
+
+          <div className="flex-item" ><img id='secondImage' className='image' src={this.state.secondImageUrl} />
+<div className="flex-container center">
+        <button id='buttonOption2' className='button center' onClick={this.submitChoice}>Select Option 2</button>
+</div>
+        </div>
+        </div>
+
+
       </div>
     );
   }
